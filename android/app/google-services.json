@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "149405810555",
+    "project_id": "qr-code-sindev",
+    "storage_bucket": "qr-code-sindev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149405810555:android:758d3fa98f9fd37f51c7de",
+        "android_client_info": {
+          "package_name": "com.sindev.qr_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv4X0rFSupdCWurpJQLHsI01Snk2RVOug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
