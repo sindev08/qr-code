@@ -1,20 +1,83 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:qr_project/app/data/product_model.dart';
 
 class HomeController extends GetxController {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  RxList<ProductModel> allProducts = List<ProductModel>.empty().obs;
+
   void downloadCatalog() async {
     final pdf = pw.Document();
+
+    // reset all products => untuk mengatasi duplikat
+    allProducts([]);
+
+    // Isi daata all product dari database
+    var getData = await firestore.collection("products").get();
+    for (var element in getData.docs) {
+      allProducts.add(ProductModel.fromJson(element.data()));
+    }
+
     pdf.addPage(
-      pw.Page(
+      pw.MultiPage(
           pageFormat: PdfPageFormat.a4,
           build: (context) {
-            return pw.Column(children: [
+            List<pw.TableRow> allData =
+                List.generate(allProducts.length, (index) {
+              ProductModel product = allProducts[index];
+              return pw.TableRow(children: [
+                pw.Padding(
+                  padding: const pw.EdgeInsets.all(20),
+                  child: pw.Text("${index + 1}",
+                      textAlign: pw.TextAlign.center,
+                      style: const pw.TextStyle(
+                        fontSize: 10,
+                      )),
+                ),
+                pw.Padding(
+                  padding: const pw.EdgeInsets.all(20),
+                  child: pw.Text(product.code,
+                      textAlign: pw.TextAlign.center,
+                      style: const pw.TextStyle(
+                        fontSize: 10,
+                      )),
+                ),
+                pw.Padding(
+                  padding: const pw.EdgeInsets.all(20),
+                  child: pw.Text(product.name,
+                      textAlign: pw.TextAlign.center,
+                      style: const pw.TextStyle(
+                        fontSize: 10,
+                      )),
+                ),
+                pw.Padding(
+                  padding: const pw.EdgeInsets.all(20),
+                  child: pw.Text("${product.qty}",
+                      textAlign: pw.TextAlign.center,
+                      style: const pw.TextStyle(
+                        fontSize: 10,
+                      )),
+                ),
+                pw.Padding(
+                    padding: const pw.EdgeInsets.all(20),
+                    child: pw.BarcodeWidget(
+                        color: PdfColor.fromHex("#000000"),
+                        barcode: pw.Barcode.qrCode(),
+                        width: 50,
+                        height: 50,
+                        data: product.code)),
+              ]);
+            });
+
+            return [
               pw.Center(
                   child: pw.Text("Catalog Product",
                       textAlign: pw.TextAlign.center,
@@ -32,84 +95,41 @@ class HomeController extends GetxController {
                         child: pw.Text("No",
                             textAlign: pw.TextAlign.center,
                             style: pw.TextStyle(
-                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
                       ),
                       pw.Padding(
                         padding: pw.EdgeInsets.all(20),
                         child: pw.Text("Product code",
                             textAlign: pw.TextAlign.center,
                             style: pw.TextStyle(
-                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
                       ),
                       pw.Padding(
                         padding: pw.EdgeInsets.all(20),
                         child: pw.Text("Nama Barang",
                             textAlign: pw.TextAlign.center,
                             style: pw.TextStyle(
-                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
                       ),
                       pw.Padding(
                         padding: pw.EdgeInsets.all(20),
                         child: pw.Text("Quantity",
                             textAlign: pw.TextAlign.center,
                             style: pw.TextStyle(
-                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
                       ),
                       pw.Padding(
                         padding: pw.EdgeInsets.all(20),
                         child: pw.Text("QR Code",
                             textAlign: pw.TextAlign.center,
                             style: pw.TextStyle(
-                                fontSize: 12, fontWeight: pw.FontWeight.bold)),
+                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
                       ),
                     ]),
                     // table body
-                    ...List.generate(6, (index) {
-                      return pw.TableRow(children: [
-                        pw.Padding(
-                          padding: pw.EdgeInsets.all(20),
-                          child: pw.Text("${index + 1}",
-                              textAlign: pw.TextAlign.center,
-                              style: pw.TextStyle(
-                                fontSize: 12,
-                              )),
-                        ),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.all(20),
-                          child: pw.Text("${83178 + index}",
-                              textAlign: pw.TextAlign.center,
-                              style: pw.TextStyle(
-                                fontSize: 12,
-                              )),
-                        ),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.all(20),
-                          child: pw.Text("Barang ${index + 1}",
-                              textAlign: pw.TextAlign.center,
-                              style: pw.TextStyle(
-                                fontSize: 12,
-                              )),
-                        ),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.all(20),
-                          child: pw.Text("3232${1312 + index}",
-                              textAlign: pw.TextAlign.center,
-                              style: pw.TextStyle(
-                                fontSize: 12,
-                              )),
-                        ),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.all(20),
-                          child: pw.Text("QR Code",
-                              textAlign: pw.TextAlign.center,
-                              style: pw.TextStyle(
-                                fontSize: 12,
-                              )),
-                        ),
-                      ]);
-                    })
+                    ...allData
                   ])
-            ]);
+            ];
           }),
     );
 
