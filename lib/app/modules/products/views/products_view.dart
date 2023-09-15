@@ -25,17 +25,11 @@ class ProductsView extends GetView<ProductsController> {
                   child: CircularProgressIndicator(),
                 );
               }
-              if (snapProducts.hasData && snapProducts.data!.docs.isEmpty) {
+              if (snapProducts.data!.docs.isEmpty) {
                 return const Center(
                   child: Text("No Product"),
                 );
               }
-              // List<ProductModel> allProducts = [];
-              // if (snapProducts.hasData) {
-              //   for (var element in snapProducts.data!.docs) {
-              //     allProducts.add(ProductModel.fromJson(element.data()));
-              //   }
-              // }
               List<ProductModel> allProducts = [];
               for (var element in snapProducts.data?.docs ?? []) {
                 allProducts.add(ProductModel.fromJson(element.data()));
@@ -47,7 +41,7 @@ class ProductsView extends GetView<ProductsController> {
                     ProductModel product = allProducts[index];
                     return Card(
                         elevation: 5,
-                        margin: EdgeInsets.only(bottom: 20),
+                        margin: const EdgeInsets.only(bottom: 20),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(9)),
                         child: InkWell(
