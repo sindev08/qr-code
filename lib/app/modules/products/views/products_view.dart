@@ -76,7 +76,7 @@ class ProductsView extends GetView<ProductsController> {
                                   height: 50,
                                   width: 50,
                                   child: QrImageView(
-                                    data: '9379739',
+                                    data: product.code,
                                     version: QrVersions.auto,
                                     size: 200.0,
                                   ),

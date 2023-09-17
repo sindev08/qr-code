@@ -158,21 +158,21 @@ class HomeController extends GetxController {
 
       if (hasil.docs.isEmpty) {
         return {
-          "erorr": true,
-          "message": "Tidak ada product ini di database",
+          "error": true,
+          "message": "Tidak ada product ini di database ${codeBarang}",
         };
       }
 
       Map<String, dynamic> data = hasil.docs.first.data();
 
       return {
-        "erorr": false,
+        "error": false,
         "message": "Berhasil mendapatkan detail product",
         "data": ProductModel.fromJson(data)
       };
     } catch (e) {
       return {
-        "erorr": true,
+        "error": true,
         "message": "Tidak mendapatkan detail product dari code ini",
       };
     }

@@ -37,7 +37,7 @@ class DetailProductView extends GetView<DetailProductController> {
                   width: 200,
                   // color: Colors.grey,
                   child: QrImageView(
-                    data: '9379739',
+                    data: product.code,
                     version: QrVersions.auto,
                     size: 200.0,
                   ),
