@@ -146,4 +146,35 @@ class HomeController extends GetxController {
     // buka pdf
     await OpenFile.open(file.path);
   }
+
+  Future getProductById(String codeBarang) async {
+    try {
+      // get from firebase
+
+      var hasil = await firestore
+          .collection("products")
+          .where("code", isEqualTo: codeBarang)
+          .get();
+
+      if (hasil.docs.isEmpty) {
+        return {
+          "erorr": true,
+          "message": "Tidak ada product ini di database",
+        };
+      }
+
+      Map<String, dynamic> data = hasil.docs.first.data();
+
+      return {
+        "erorr": false,
+        "message": "Berhasil mendapatkan detail product",
+        "data": ProductModel.fromJson(data)
+      };
+    } catch (e) {
+      return {
+        "erorr": true,
+        "message": "Tidak mendapatkan detail product dari code ini",
+      };
+    }
+  }
 }
