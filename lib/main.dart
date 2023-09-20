@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:qr_project/app/constant/color.dart';
 import 'package:qr_project/app/controllers/auth_controller.dart';
 import 'app/modules/loading/loading_screen.dart';
 import 'firebase_options.dart';
@@ -36,6 +37,8 @@ class MyApp extends StatelessWidget {
             title: "QR Code",
             initialRoute: snapAuth.hasData ? Routes.home : Routes.login,
             getPages: AppPages.routes,
+            theme: ThemeData(
+                fontFamily: 'Poppins', primarySwatch: CustomColors.primary),
           );
         });
   }
