@@ -31,6 +31,12 @@ flutter:
   assets:
     - assets/rocket.svg
     - assets/login.svg
+    - assets/add.svg
+    - assets/print.svg
+    - assets/product.svg
+    - assets/scan.svg
+    - assets/profile.svg
+    - assets/logout.svg
   fonts:
     - family: Poppins
       fonts:

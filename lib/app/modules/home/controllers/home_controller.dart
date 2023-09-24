@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -11,6 +12,11 @@ import 'package:qr_project/app/data/product_model.dart';
 
 class HomeController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  var authChange =
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    print('Ini data user : ${user}');
+  });
 
   RxList<ProductModel> allProducts = List<ProductModel>.empty().obs;
 
