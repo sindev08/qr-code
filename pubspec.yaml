@@ -38,6 +38,8 @@ flutter:
     - assets/profile.svg
     - assets/logout.svg
     - assets/addProduct.svg
+    - assets/products.svg
+    - assets/arrowRight.svg
   fonts:
     - family: Poppins
       fonts:
