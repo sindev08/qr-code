@@ -111,90 +111,123 @@ class ProductsView extends GetView<ProductsController> {
                                                 ),
                                           ),
                                         ),
-                                        Positioned(
-                                          top: 0,
-                                          left: 10,
-                                          bottom: 0,
-                                          width: 296,
+                                        Expanded(
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(
-                                                vertical: 12, horizontal: 12),
+                                                vertical: 12, horizontal: 18),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                SizedBox(
-                                                  height: 80,
-                                                  width: 80,
-                                                  child: QrImageView(
-                                                    data: product.code,
-                                                    version: QrVersions.auto,
-                                                    size: 200.0,
-                                                  ),
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                                Row(
                                                   children: [
-                                                    Row(
-                                                      children: [
-                                                        const Text(
-                                                          "Kode : ",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
-                                                        ),
-                                                        Text(
-                                                          product.code,
-                                                          style: const TextStyle(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                        )
-                                                      ],
+                                                    SizedBox(
+                                                      height: 80,
+                                                      width: 80,
+                                                      child: QrImageView(
+                                                        data: product.code,
+                                                        version:
+                                                            QrVersions.auto,
+                                                        size: 200.0,
+                                                      ),
                                                     ),
-                                                    // const SizedBox(
-                                                    //   height: 8,
-                                                    // ),
-                                                    Row(
+                                                    SizedBox(width: 20),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
-                                                        const Text(
-                                                          "Nama : ",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                        Row(
+                                                          children: [
+                                                            const Text(
+                                                              "Kode : ",
+                                                              style: TextStyle(
+                                                                  fontSize: 12),
+                                                            ),
+                                                            Container(
+                                                              constraints:
+                                                                  BoxConstraints(
+                                                                      maxWidth:
+                                                                          100), // Batasan lebar container
+                                                              child: Text(
+                                                                product.code,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                ),
+                                                                softWrap: false,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                maxLines: 1,
+                                                              ),
+                                                            ),
+                                                            // Text(
+                                                            //   product.code,
+                                                            //   overflow:
+                                                            //       TextOverflow
+                                                            //           .ellipsis,
+                                                            //   maxLines: 1,
+                                                            //   style: const TextStyle(
+                                                            //       fontSize: 12,
+                                                            //       fontWeight:
+                                                            //           FontWeight
+                                                            //               .w700),
+                                                            // ),
+                                                          ],
                                                         ),
-                                                        Text(
-                                                          product.name,
-                                                          style: const TextStyle(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    // const SizedBox(
-                                                    //   height: 8,
-                                                    // ),
-                                                    Row(
-                                                      children: [
-                                                        const Text(
-                                                          'Jumlah :',
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                        Row(
+                                                          children: [
+                                                            const Text(
+                                                              "Nama : ",
+                                                              style: TextStyle(
+                                                                  fontSize: 12),
+                                                            ),
+                                                            Container(
+                                                              constraints:
+                                                                  BoxConstraints(
+                                                                      maxWidth:
+                                                                          100),
+                                                              child: Text(
+                                                                product.name,
+                                                                style: const TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700),
+                                                                softWrap: false,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                maxLines: 1,
+                                                              ),
+                                                            )
+                                                          ],
                                                         ),
-                                                        Text(
-                                                          ' ${product.qty}',
-                                                          style:
-                                                              const TextStyle(
+                                                        Row(
+                                                          children: [
+                                                            const Text(
+                                                              'Jumlah :',
+                                                              style: TextStyle(
+                                                                  fontSize: 12),
+                                                            ),
+                                                            Text(
+                                                              ' ${product.qty}',
+                                                              style: const TextStyle(
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
                                                                   fontSize: 12),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),

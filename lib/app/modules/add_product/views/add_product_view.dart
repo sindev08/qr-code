@@ -34,127 +34,132 @@ class AddProductView extends GetView<AddProductController> {
                 ]),
               )),
           Positioned(
-            top: 277,
+            top: MediaQuery.of(context).size.height * 0.3,
             left: 0,
             right: 0,
             bottom: 0,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 32.0),
-                decoration: BoxDecoration(
-                    color: CustomColors.white,
-                    border:
-                        Border.all(color: CustomColors.grey.shade200, width: 1),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color.fromRGBO(14, 8, 48, 0.1),
-                        offset: Offset(0.0, 10.0), //(x,y)
-                        blurRadius: 20.0,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(12)),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          CreateSvg(
-                            width: 32,
-                          ),
-                          const SizedBox(width: 10),
-                          const Text(
-                            "Tambah",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 32.0),
+                  decoration: BoxDecoration(
+                      color: CustomColors.white,
+                      border: Border.all(
+                          color: CustomColors.grey.shade200, width: 1),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color.fromRGBO(14, 8, 48, 0.1),
+                          offset: Offset(0.0, 10.0), //(x,y)
+                          blurRadius: 20.0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 40, horizontal: 30),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            CreateSvg(
+                              width: 32,
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 52),
-                      TextField(
-                        autocorrect: false,
-                        controller: codeC,
-                        keyboardType: TextInputType.number,
-                        maxLength: 10,
-                        style: TextStyle(
-                            fontSize: 16, color: CustomColors.grey.shade900),
-                        decoration: InputDecoration(
-                            labelText: "Kode Produk",
-                            labelStyle: TextStyle(
-                              fontSize: 14,
-                              color: CustomColors.grey.shade600,
-                            )),
-                      ),
-                      const SizedBox(height: 12),
-                      TextField(
-                        autocorrect: false,
-                        controller: nameC,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(
-                            fontSize: 16, color: CustomColors.grey.shade900),
-                        decoration: InputDecoration(
-                            labelText: "Nama Produk",
-                            labelStyle: TextStyle(
-                              fontSize: 14,
-                              color: CustomColors.grey.shade600,
-                            )),
-                      ),
-                      const SizedBox(height: 32),
-                      TextField(
-                        autocorrect: false,
-                        controller: qtyC,
-                        keyboardType: TextInputType.number,
-                        style: TextStyle(
-                            fontSize: 16, color: CustomColors.grey.shade900),
-                        decoration: InputDecoration(
-                            labelText: "Quantity",
-                            labelStyle: TextStyle(
-                              fontSize: 14,
-                              color: CustomColors.grey.shade600,
-                            )),
-                      ),
-                      const SizedBox(height: 52),
-                      ElevatedButton(
-                          onPressed: () async {
-                            if (controller.isLoading.isFalse) {
-                              if (codeC.text.isNotEmpty &&
-                                  nameC.text.isNotEmpty &&
-                                  qtyC.text.isNotEmpty) {
-                                controller.isLoading(true);
-                                Map<String, dynamic> hasil =
-                                    await controller.addProduct({
-                                  "code": codeC.text,
-                                  "name": nameC.text,
-                                  "qty": int.tryParse(qtyC.text) ?? 0,
-                                });
-                                controller.isLoading(false);
-                                Get.back();
-                                Get.snackbar(
-                                    hasil["error"] == true
-                                        ? "Error"
-                                        : "Success",
-                                    hasil["error"] == true
-                                        ? "Semua data wajib diisi"
-                                        : hasil["message"]);
-                              } else {
-                                Get.snackbar("Error", "Semua data wajib diisi");
-                              }
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(9),
+                            const SizedBox(width: 10),
+                            const Text(
+                              "Tambah",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              minimumSize: Size(266, 30)),
-                          child: Text(controller.isLoading.isFalse
-                              ? "Add Product"
-                              : "Loading..."))
-                    ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 52),
+                        TextField(
+                          autocorrect: false,
+                          controller: codeC,
+                          keyboardType: TextInputType.number,
+                          maxLength: 10,
+                          style: TextStyle(
+                              fontSize: 16, color: CustomColors.grey.shade900),
+                          decoration: InputDecoration(
+                              labelText: "Kode Produk",
+                              labelStyle: TextStyle(
+                                fontSize: 14,
+                                color: CustomColors.grey.shade600,
+                              )),
+                        ),
+                        const SizedBox(height: 12),
+                        TextField(
+                          autocorrect: false,
+                          controller: nameC,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                              fontSize: 16, color: CustomColors.grey.shade900),
+                          decoration: InputDecoration(
+                              labelText: "Nama Produk",
+                              labelStyle: TextStyle(
+                                fontSize: 14,
+                                color: CustomColors.grey.shade600,
+                              )),
+                        ),
+                        const SizedBox(height: 32),
+                        TextField(
+                          autocorrect: false,
+                          controller: qtyC,
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(
+                              fontSize: 16, color: CustomColors.grey.shade900),
+                          decoration: InputDecoration(
+                              labelText: "Quantity",
+                              labelStyle: TextStyle(
+                                fontSize: 14,
+                                color: CustomColors.grey.shade600,
+                              )),
+                        ),
+                        const SizedBox(height: 52),
+                        ElevatedButton(
+                            onPressed: () async {
+                              if (controller.isLoading.isFalse) {
+                                if (codeC.text.isNotEmpty &&
+                                    nameC.text.isNotEmpty &&
+                                    qtyC.text.isNotEmpty) {
+                                  controller.isLoading(true);
+                                  Map<String, dynamic> hasil =
+                                      await controller.addProduct({
+                                    "code": codeC.text,
+                                    "name": nameC.text,
+                                    "qty": int.tryParse(qtyC.text) ?? 0,
+                                  });
+                                  controller.isLoading(false);
+                                  Get.back();
+                                  Get.snackbar(
+                                      hasil["error"] == true
+                                          ? "Error"
+                                          : "Success",
+                                      hasil["error"] == true
+                                          ? "Semua data wajib diisi"
+                                          : hasil["message"]);
+                                } else {
+                                  Get.snackbar(
+                                      "Error", "Semua data wajib diisi");
+                                }
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(9),
+                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                minimumSize: Size(266, 30)),
+                            child: Text(controller.isLoading.isFalse
+                                ? "Add Product"
+                                : "Loading..."))
+                      ],
+                    ),
                   ),
                 ),
               ),
