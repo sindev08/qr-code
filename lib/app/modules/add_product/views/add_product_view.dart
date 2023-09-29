@@ -16,6 +16,19 @@ class AddProductView extends GetView<AddProductController> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: CustomColors.grey.shade100,
+      appBar: AppBar(
+        backgroundColor: CustomColors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: CustomColors.primary,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Stack(
         children: [
           Positioned(

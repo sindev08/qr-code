@@ -25,19 +25,28 @@ class DetailProductView extends GetView<DetailProductController> {
 
     return SafeArea(
       child: Scaffold(
-          // appBar: AppBar(
-          //   title: const Text('Detail Product'),
-          //   centerTitle: true,
-          // ),
+          appBar: AppBar(
+            backgroundColor: CustomColors.white,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: CustomColors.primary,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
           body: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxHeight <= 0.3) {
-            return Container(child: Positioning(constraints.maxHeight));
-          } else {
-            return Container(child: Positioning(277.0));
-          }
-        },
-      )),
+            builder: (context, constraints) {
+              if (constraints.maxHeight <= 0.3) {
+                return Container(child: Positioning(constraints.maxHeight));
+              } else {
+                return Container(child: Positioning(277.0));
+              }
+            },
+          )),
     );
   }
 

@@ -17,10 +17,19 @@ class ProductsView extends GetView<ProductsController> {
     return SafeArea(
       child: Scaffold(
           backgroundColor: CustomColors.grey.shade100,
-          // appBar: AppBar(
-          //   title: const Text('Products'),
-          //   centerTitle: true,
-          // ),
+          appBar: AppBar(
+            backgroundColor: CustomColors.white,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: CustomColors.primary,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
           body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: controller.streamProducts(),
               builder: (context, snapProducts) {
