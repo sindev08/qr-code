@@ -18,14 +18,14 @@ class HomeView extends GetView<HomeController> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: CustomColors.grey.shade100,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: Stack(children: [
-            Positioned(
-                top: 32,
-                left: 0,
-                right: 0,
-                child: Container(
+        body: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Column(children: [
+                Container(
+                  margin: EdgeInsets.only(top: 32),
+                  constraints: BoxConstraints(minWidth: 320, maxWidth: 400),
                   decoration: BoxDecoration(
                     color: CustomColors.white,
                     borderRadius: BorderRadius.circular(12),
@@ -75,15 +75,8 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   ),
-                )),
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.15,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Container(
+                ),
+                Container(
                   margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.15),
                   child: Column(
@@ -211,9 +204,9 @@ class HomeView extends GetView<HomeController> {
                     ],
                   ),
                 ),
-              ),
-            ),
-          ]),
+              ]),
+            )
+          ],
         ),
       ),
     );
